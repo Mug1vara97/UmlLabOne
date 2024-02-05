@@ -1,0 +1,49 @@
+@startuml
+
+class DiskWriter {
+  +writeToDisk()
+  +verifyOnDisk()
+  +finalizeDisk()
+}
+
+class Disk {
+  -freeSpace
+  +getFreeSpace()
+  +isDamaged()
+  +setDamaged()
+}
+
+class Application {
+  -diskWriter: DiskWriter
+  -disk: Disk
+  +run()
+}
+
+class User {
+  +chooseFilesToWrite()
+  +handleResult(result)
+}
+
+class VerificationError {
+  +getCode()
+}
+
+class StorageError {
+  +getCode()
+}
+
+class FinalizationError {
+  +getCode()
+}
+
+DiskWriter ..> Disk: writes on
+DiskWriter ..> VerificationError: throws
+DiskWriter ..> StorageError: throws
+DiskWriter ..> FinalizationError: throws
+
+Application --> DiskWriter: uses
+Application --> User: interacts with
+Disk --> StorageError: throws
+User --> Application: interacts with
+
+@enduml

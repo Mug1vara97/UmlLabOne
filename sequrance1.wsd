@@ -1,0 +1,19 @@
+@startuml
+
+participant "Диск" as Disk
+participant "Запись" as Write
+participant "Верификация" as Verify
+
+User -> Disk: Записать данные
+activate Disk
+Disk -> Write: Начать запись
+activate Write
+Write --> Disk: Запись завершена
+deactivate Write
+Disk -> Verify: Начать верификацию
+activate Verify
+Verify --> Disk: Верификация завершена
+deactivate Verify
+User <-- Disk: Диск готов к использованию
+deactivate Disk
+@enduml

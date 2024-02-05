@@ -1,0 +1,22 @@
+@startuml 
+
+left to right direction
+
+actor "Пользователь" as user
+
+package "Работа с диском"{
+    "Чтение с диска" as (Read)
+    "Запись на диск" as (Write)
+    "Форматирование диска" as (Formatting)
+    "Переименование диска" as (Rename)
+    "Очистка диска" as (Clean)
+    
+    
+    user --> (Read)
+    user --> (Write)
+    user --> (Formatting)
+    user --> (Rename)
+    user --> (Clean)
+
+}
+@enduml
